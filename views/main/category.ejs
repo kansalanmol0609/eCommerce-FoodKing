@@ -1,0 +1,25 @@
+<% layout('layout') -%>
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <div class="container">
+        <h1 style="text-transform: capitalize;"><%= category.name %>: </h1>
+        <div class="row">
+            <% if(products.length === 0) { %>
+            <h1 style="margin:auto;">Currently, no item available in this category :(</h1>
+            <% } else { %>
+            <% products.forEach(x => { %>
+                <div class="col-md-4 text-center">
+                        <div class="menu-wrap border">
+                            <a href="/product/<%= x._id %>">
+                                <p href="#" class="menu-img img mb-4" style="background-image: url(data:image/jpg;base64,<%=x.image%>)">
+                                </p>
+                                <div class="text">
+                                    <h3 class=""><strong>Name: </strong> <%= x.name%></h3>
+                                    <p class=""><strong>Price: </strong> <span>INR <%= x.price %></span></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+            <% }) }%>
+        </div>
+    </div>
+</section>

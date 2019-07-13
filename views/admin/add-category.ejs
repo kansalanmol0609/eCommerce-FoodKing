@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <% if(message.length>0) { %>
+    <div class="alert alert-dark alert-dismissable" style="margin-left: 20%; margin-right:20%;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+
+    <form method="POST" style="margin-left: 20%; margin-right:20%;">
+        <h1>Add category of food</h1>
+        <div class="form-group">
+            <label="name">Category: </label>
+                <input type="text" class="form-control text-left pl-2" name="name">
+        </div>
+        <p class="text-left"><a href="javascript:$('form').submit();" class="btn btn-primary py-3 px-4">Submit</a>
+        </p>
+    </form>
+</section>

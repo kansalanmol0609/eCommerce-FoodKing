@@ -1,0 +1,43 @@
+<% layout('layout') -%>
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <div class="container">
+        <% if(message.length>0) { %>
+        <div class="alert alert-dark alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%= message %>
+        </div>
+        <% } %>
+        <h1 class="mb-4">All Orders: </h1>
+        <table class="table table-striped sticky-header">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Payment Status</th>
+                    <th>Order Status</th>
+                    <th>Mark Delivered</th>
+                </tr>
+            <tbody>
+                <% orders.forEach(x => { %>
+                <tr>
+                    <td><a href="/order/<%= x._id %>"><%= x._id %></a></td>
+                    <td><%= x.owner %></td>
+                    <td><%= (x.transactionComplete)?'Paid':'Pending/Failed' %></td>
+                    <td><%= (x.orderComplete)?'Delivered':(x.transactionComplete)?'Pending':'Payment Failed' %></td>
+                    <% if(!x.orderComplete && x.transactionComplete){ %>
+                    <form action="/complete-order/<%= x._id%>" method="POST">
+                        <td><input type="submit" type="button" value="Mark as Delivered" class="btn btn-primary"></td>
+                    </form>
+                    <% } else{ %>
+                    <td>-</td>
+                    <% } %>
+                </tr>
+                <% }) %>
+            </tbody>
+            </thead>
+        </table>
+    </div>
+</section>

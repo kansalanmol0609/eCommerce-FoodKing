@@ -1,0 +1,39 @@
+<% layout('layout') -%>
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <% if(message.length>0) { %>
+    <div class="alert alert-dark alert-dismissable" style="margin-left: 20%; margin-right:20%;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+    <div class="container">
+        <h1>Delete an item</h1>
+        <div class="row pt-3">
+            <% if(products.length === 0) { %>
+            <h1 style="margin:auto;">No food items to display</h1>
+            <% } else { %>
+
+            <% products.forEach(x => { %>
+            <div class="col-md-4 text-center">
+                <div class="menu-wrap">
+                    <a href="#" class="menu-img img mb-4"
+                        style="background-image: url(data:image/jpg;base64,<%=x.image%>)"></a>
+                    <div class="text">
+                        <h3><a href="#"><%= x.name %></a></h3>
+                        <p><strong>Category: </strong><%= x.category.name %></p>
+                        <p class="price"><span>INR <%= x.price %></span></p>
+                        <form action="/delete-product/<%= x._id %>" method="POST" id="delete<%=x._id%>">
+                            <a href="javascript:$('#delete<%=x._id%>').submit();"
+                                class="btn btn-primary btn-outline-primary">Delete Item</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <% }) }%>
+        </div>
+</section>

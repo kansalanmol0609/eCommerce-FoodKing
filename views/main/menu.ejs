@@ -1,0 +1,16 @@
+<% layout('layout') -%>
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <div class="container">
+        <h1 class="mb-5">Choose from below categories: -</h1>
+        <% categories.forEach(x => { %>
+        <div class="pricing-entry d-flex ftco-animate">
+            <div class="desc pl-3">
+                <a href="products/<%=x._id%>">
+                    <h3 class="border-bottom"><span style="text-transform: capitalize;"><%= x.name %></span></h3>
+                </a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</section>

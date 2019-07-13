@@ -1,0 +1,48 @@
+<% layout('layout') -%>
+
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <div class="container">
+        <% if(!product) { %>
+        <h1>No product found!!!</h1>
+        <% } else { %>
+
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="" class="image-popup"><img
+                        style="width: 450px; height:400px;" src="data:image/jpg;base64,<%=product.image%>"
+                        class="img-fluid" alt=""></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <h3><%= product.name %></h3>
+                <p class="price"><span>INR <%= product.price %></span></p>
+                <p><%= product.description %></p>
+
+                <form method="POST">
+                    <div class="btn-group">
+                        <input type="hidden" name="quantity" id="quantity" value="1">
+                        <button type="button" class="quantity-left-minus btn"><i class="icon-minus"
+                                id="minus"></i></button>
+                        <button type="button" id="total" class="input-number" style="width: 50px;">1</button>
+                        <button type="button" class="quantity-right-plus btn"><i class="icon-plus"
+                                id="plus"></i></button>
+                    </div>
+                    <input type="hidden" name="product_id" value="<%= product._id %>">
+                    <input type="hidden" name="priceValue" value="<%= product.price %>" id="priceCount">
+                    <input type="hidden" value="<%= product.price %>" id="priceInd">
+                    <% if(user) { %>
+                    <p class="text-left mt-3"><a href="javascript:$('form').submit();" class="btn btn-primary py-3 px-4"
+                            style="width: 156px;">Add to Cart</a></p>
+                    <% } else { %>
+                    <p class="text-left mt-3"><a href="/signup" class="btn btn-primary py-3 px-3" style="width: 156px;">Signup
+                            to proceed</a></p>
+                    <% } %>
+                </form>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+</section>
+
+<script src="js/product.js"></script>

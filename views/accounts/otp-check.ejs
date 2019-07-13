@@ -1,0 +1,17 @@
+<% layout('layout') -%>
+
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <form method="post" action="/signupConfirmed" style="margin-left: 20%; margin-right:20%;">
+        <h1>Enter OTP received in email</h1>
+        <div class="form-group">
+                <input type="hidden" name="otpHash" value='<%=otpHash%>'>
+                <input type="hidden" name="name" value='<%=name%>'>
+                <input type="hidden" name="email" value='<%=email%>'>
+                <input type="hidden" name="password" value='<%=password%>'>
+            <label="name">OTP: </label>
+                <input type="text" class="form-control text-left pl-2" name="otp" value=''>
+        </div>
+        <p class="text-left"><a href="javascript:$('form').submit();" class="btn btn-primary py-3 px-4">Submit OTP</a>
+        </p>
+    </form>
+</section>

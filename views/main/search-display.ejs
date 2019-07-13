@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<section class="ftco-section ftco-cart" style="padding-top: 150px;">
+    <div class="container">
+        <h1>Search results: found <%=products.length%> items</h1>
+        <div class="row pt-5">
+            <% if(products.length > 0) { %>
+            <% products.forEach(x => { %>
+            <div class="col-md-4 text-center">
+                <div class="menu-wrap border">
+                    <a href="/product/<%= x._id %>">
+                        <p href="#" class="menu-img img mb-4" style="background-image: url(data:image/jpg;base64,<%=x.image%>)">
+                        </p>
+                        <div class="text">
+                            <h3 class=""><strong>Name: </strong> <%= x.name%></h3>
+                            <p class=""><strong>Price: </strong> <span>INR <%= x.price %></span></p>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% }) }%>
+        </div>
+    </div>
+</section>

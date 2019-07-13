@@ -1,0 +1,101 @@
+<% layout('layout') -%>
+<section class="ftco-section contact-section">
+    <div class="container mt-5">
+        <div class="row block-9">
+            <!-- User profile -->
+            <div class="col-md-4 contact-info ftco-animate">
+
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <h2 class="h4">Profile: </h2>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img class="img-circle img-responsive img-center" src="<%= user.profile.picture %>" alt="">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <p><span>Name:</span> <%= user.profile.name %></p>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <p><span>Email:</span> <%= user.email %></p>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <p><span>Address:</span>
+                            <% if(user.address==="" || typeof user.address==='undefined'){ %>
+                            You have not provided any address
+                            <% } else { %>
+                            <%= user.address %>
+                            <% } %>
+                        </p>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /User Profile -->
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-4 contact-info ftco-animate">
+                <div class="col-md-12 mb-4">
+                    <h2 class="h4">Order History: </h2>
+                </div>
+
+                <% if(user.history.length == 0 ){ %>
+                <div class="col-md-12 mb-3">
+                    <p>No orders yet</p>
+                </div>
+                <% }else{ %>
+                <% var cnt = 1 %>
+                <% user.history.forEach(x => { %>
+                <div class="col-md-12 mb-3">
+                    <p><%= cnt++ %>. <a href="/order/<%= x.orderID %>"><%= x.orderID %></a></p>
+                </div>
+                <% }) %>
+                <% } %>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <img class="img-circle img-responsive img-center" src="<%= user.profile.picture %>" alt="">
+            <br />
+            <p>Name: <%= user.profile.name %></p>
+            <p>Email: <%= user.email %></p>
+
+            <% if(user.address==="" || typeof user.address==='undefined'){ %>
+            <p>Address: <span style="color: orangered; font-weight:bold;">You have not provided any address</span></p>
+           <% } else { %>
+            <p>Address: <%= user.address %></p>
+            <% } %>
+            <a href="/edit-profile" class="btn btn-primary">Edit Profile</a>
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="text-center">History</h2>
+            
+            <table class="table table-striped sticky-header">
+                <thead>
+                    <tr>
+                        <th>Order's ID</th>
+                    </tr>
+                    <tbody>
+                        <% user.history.forEach(x => { %>
+                            <tr>
+                                <td><a href="/order/<%= x.orderID %>"><%= x.orderID %></a></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+</div> -->

@@ -1,0 +1,99 @@
+<% layout('layout') -%>
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Cart</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Cart</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-cart">
+
+    <% if(message.length>0) { %>
+    <div class="alert alert-success alert-dismissable" style="margin-left: 20%; margin-right:20%;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+
+    <!-- Cart Table -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% foundCart.items.forEach( x => { %>
+                            <tr class="text-center">
+                                <td class="product-remove">
+                                    <form action="/remove" method="POST" id="RemoveForm">
+                                        <input type="hidden" name="item" value="<%= x._id%>">
+                                        <input type="hidden" name="price" value="<%= x.price%>">
+                                        <a href="javascript:$('#RemoveForm').submit();"><span class="icon-close"></span></a>
+                                    </form>
+                                </td>
+
+                                <td class="image-prod">
+                                    <div class="img" style="background-image: url(data:image/jpg;base64,<%=x.item.image%>);">
+                                    </div>
+                                </td>
+
+                                <td class="price"><%= x.item.name %></td>
+                                <td class="price"><%= (x.price/x.quantity) %></td>
+                                <td class="price"><%= x.quantity %></td>
+                                <td class="total">INR <%= x.price %></td>
+                            </tr><!-- END TR-->
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /Cart Table -->
+
+        <!-- Paytm Payment -->
+        <div class="row justify-content-end">
+            <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
+
+                <div class="cart-total mb-3">
+                    <form action="/payOrder" method="POST" id="paymentForm">
+                        <h3> Cart Totals</h3>
+                        <p class="d-flex">
+                            <span>Total</span>
+                            <span>INR <%= foundCart.total%></span>
+                        </p>
+                        <input type="hidden" name="amount" value="<%= foundCart.total%>">
+                        <input type="hidden" name="items" value="<%= foundCart.items%>">
+                        <% if(foundCart.total>0){%>
+                        <p class="text-center"><a href="javascript:$('#paymentForm').submit();"
+                                class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
+                        </p>
+                        <% }%>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Paytm Payment -->
+    </div>
+</section>
